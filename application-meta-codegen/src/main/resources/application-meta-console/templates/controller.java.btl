@@ -75,7 +75,7 @@ public class ${table.controllerName} {
             return ApiResponse.ok(service.removeById(entity));
         }
 
-        @GetMapping(path = {"/{id}"})
+        @GetMapping(path = {"/item/{id}"})
         public Object get(@PathVariable("id") Serializable id){
             ${entity} entity = service.getById(id);
             ${entity}VO viewObject = ${entity}MapStruct.INSTANCE.entityToVO(entity);

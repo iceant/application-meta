@@ -6,6 +6,7 @@ function defineCustomFiles(tableInfo, objectMap){
         template:"templates/dto.java.btl",
         override: true,
         fieldMap:{
+            "id":"Long",
             "userFriendlyName":"com.github.iceant.application.meta.console.domain.LocaleString",
             "description":"com.github.iceant.application.meta.console.domain.LocaleString"
         }
@@ -16,6 +17,7 @@ function defineCustomFiles(tableInfo, objectMap){
         template:"templates/vo.java.btl",
         override: true,
         fieldMap:{
+            "id":"Long",
             "userFriendlyName":"com.github.iceant.application.meta.console.domain.LocaleString",
             "description":"com.github.iceant.application.meta.console.domain.LocaleString"
         }

@@ -33,6 +33,7 @@ create table if not exists t_app_menu
     description TEXT,
     icon TEXT,
     path TEXT,
+    view TEXT,
     parent_id INTEGER DEFAULT 0,
     creation_datetime TIMESTAMP
 );

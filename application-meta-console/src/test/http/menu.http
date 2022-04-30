@@ -1,0 +1,47 @@
+### 新建菜单'协议视角'
+POST http://localhost:8080/storage/tAppMenu/
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "协议视角",
+  "icon": "connection",
+  "path": "/protocol",
+  "parentId": 0
+}
+
+### 新建菜单'GB32960'
+POST http://localhost:8080/storage/tAppMenu/
+Content-Type: application/json
+
+{
+  "name": "GB32960V2016",
+  "icon": "message",
+  "path": "/protocol/gb32960/v2016",
+  "view": "GB32960V2016",
+  "parentId": 1
+}
+
+### 新建菜单'GB27930'
+POST http://localhost:8080/storage/tAppMenu/
+Content-Type: application/json
+
+{
+  "name": "GB27930V2015",
+  "icon": "message",
+  "path": "/protocol/gb27930/v2015",
+  "view": "GB27930V2015",
+  "parentId": 1
+}
+
+### 新建菜单'DB4403'
+POST http://localhost:8080/storage/tAppMenu/
+Content-Type: application/json
+
+{
+  "name": "DB4403V2020",
+  "icon": "message",
+  "path": "/protocol/db4403/v2020",
+  "view": "DB4403V2020",
+  "parentId": 1
+}

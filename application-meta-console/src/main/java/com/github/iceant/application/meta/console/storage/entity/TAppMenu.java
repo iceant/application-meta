@@ -24,7 +24,7 @@ public class TAppMenu implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId("id")
-    private Integer id;
+    private Long id;
 
     @TableField("name")
     private String name;
@@ -40,6 +40,9 @@ public class TAppMenu implements Serializable {
 
     @TableField("path")
     private String path;
+
+    @TableField("view")
+    private String view;
 
     @TableField("parent_id")
     private Integer parentId;
@@ -58,6 +61,8 @@ public class TAppMenu implements Serializable {
     public static final String ICON = "icon";
 
     public static final String PATH = "path";
+
+    public static final String VIEW = "view";
 
     public static final String PARENT_ID = "parent_id";
 

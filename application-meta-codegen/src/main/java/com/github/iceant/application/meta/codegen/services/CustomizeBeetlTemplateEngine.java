@@ -85,20 +85,7 @@ public class CustomizeBeetlTemplateEngine extends BeetlTemplateEngine {
         return objectMap;
     }
 
-    public List beforeOutputFile(TableInfo tableInfo, Map<String, Object> objectMap){
-        List result = JsUtil.invokeInClasspath("classpath:"+Paths.get(generatorName, "beforeOutputFile.js").toString(),
-                "defineCustomFiles"
-                , new Object[]{objectMap}, List.class, new JsUtil.CustomizeFunction() {
-            @Override
-            public void customize(Context context, Scriptable scope) {
-                JsUtil.putIntoScope(this, "$engine", scope);
-                JsUtil.putIntoScope(getConfigBuilder(), "$config", scope);
-                JsUtil.putIntoScope(tableInfo, "$tableInfo", scope);
-                JsUtil.putIntoScope(objectMap, "$context", scope);
-            }
-        });
-        return result;
-    }
+
 
     public static List<Object> nativeArrayToList(NativeArray nativeArray)
     {
@@ -175,6 +162,33 @@ public class CustomizeBeetlTemplateEngine extends BeetlTemplateEngine {
         return Paths.get( generatorName, templatePath).toString();
     }
 
+    public List defineCustomFiles(TableInfo tableInfo, Map<String, Object> objectMap){
+        List result = JsUtil.invokeInClasspath("classpath:"+Paths.get(generatorName, "defineCustomFiles.js").toString(),
+                "defineCustomFiles"
+                , new Object[]{objectMap}, List.class, new JsUtil.CustomizeFunction() {
+                    @Override
+                    public void customize(Context context, Scriptable scope) {
+                        JsUtil.putIntoScope(this, "$engine", scope);
+                        JsUtil.putIntoScope(getConfigBuilder(), "$config", scope);
+                        JsUtil.putIntoScope(tableInfo, "$tableInfo", scope);
+                        JsUtil.putIntoScope(objectMap, "$context", scope);
+                    }
+                });
+        return result;
+    }
+
+    public void beforeOutput(TableInfo tableInfo, Map<String, Object> objectMap){
+        JsUtil.runInClasspath("classpath:"+Paths.get(generatorName, "beforeOutput.js"), objectMap, Void.class, new JsUtil.CustomizeFunction() {
+            @Override
+            public void customize(Context context, Scriptable scope) {
+                JsUtil.putIntoScope(this, "$engine", scope);
+                JsUtil.putIntoScope(getConfigBuilder(), "$config", scope);
+                JsUtil.putIntoScope(tableInfo, "$tableInfo", scope);
+                JsUtil.putIntoScope(objectMap, "$context", scope);
+            }
+        });
+    }
+
     public AbstractTemplateEngine batchOutput() {
         try {
             ConfigBuilder config = this.getConfigBuilder();
@@ -183,8 +197,10 @@ public class CustomizeBeetlTemplateEngine extends BeetlTemplateEngine {
                 Map<String, Object> objectMap = this.getObjectMap(config, tableInfo);
 
                 // 输出自定义文件
-                List customFileList =  beforeOutputFile(tableInfo, objectMap);
+                List customFileList =  defineCustomFiles(tableInfo, objectMap);
                 outputCustomFile(customFileList, tableInfo, objectMap);
+
+                beforeOutput(tableInfo, objectMap);
 
                 // entity
                 outputEntity(tableInfo, objectMap);
@@ -197,7 +213,7 @@ public class CustomizeBeetlTemplateEngine extends BeetlTemplateEngine {
             });
 
             Map<String, Object> objectMap = makeSimpleObjectMap(config);
-            JsUtil.runInClasspath("classpath:"+generatorName+"/main.js", objectMap, null, (context, scope) -> {
+            JsUtil.runInClasspath("classpath:"+generatorName+"/extraHandler.js", objectMap, null, (context, scope) -> {
                 JsUtil.putIntoScope(this, "$engine", scope);
                 JsUtil.putIntoScope(config, "$config", scope);
             });

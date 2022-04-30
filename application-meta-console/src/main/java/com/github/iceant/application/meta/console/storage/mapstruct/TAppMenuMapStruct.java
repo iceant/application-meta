@@ -10,6 +10,8 @@ import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
+import java.util.List;
+
 @Mapper(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface TAppMenuMapStruct {
     TAppMenuMapStruct INSTANCE = Mappers.getMapper(TAppMenuMapStruct.class);
@@ -20,11 +22,17 @@ public interface TAppMenuMapStruct {
 
     TAppMenuVO entityToVO(TAppMenu entity);
 
+    List<TAppMenuVO> entityListToVOList(List<TAppMenu> entityList);
+
+    List<TAppMenu> dtoListToEntityList(List<TAppMenuDTO> dtoList);
+
     default String map(LocaleString value){
+        if(value==null) return null;
         return value.toString();
     }
 
     default LocaleString map(String value){
+        if(value==null) return null;
         return LocaleString.fromString(value);
     }
 }

@@ -20,7 +20,7 @@ public class TAppMenuVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Integer id;
+    private Long id;
 
     private String name;
 
@@ -31,6 +31,8 @@ public class TAppMenuVO implements Serializable {
     private String icon;
 
     private String path;
+
+    private String view;
 
     private Integer parentId;
 

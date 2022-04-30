@@ -1,20 +1,17 @@
 package com.github.iceant.application.meta.console.storage.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.github.iceant.application.meta.console.storage.dto.TAppMenuDTO;
+import com.github.iceant.application.meta.console.storage.entity.TAppMenu;
+import com.github.iceant.application.meta.console.storage.mapstruct.TAppMenuMapStruct;
+import com.github.iceant.application.meta.console.storage.service.ITAppMenuService;
+import com.github.iceant.application.meta.console.storage.vo.TAppMenuVO;
+import com.github.iceant.application.meta.console.utils.PrimaryKeyUtil;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import com.github.iceant.application.meta.console.storage.entity.*;
-import com.github.iceant.application.meta.console.storage.mapstruct.*;
-import com.github.iceant.application.meta.console.storage.service.*;
-import com.github.iceant.application.meta.console.storage.dto.*;
-import com.github.iceant.application.meta.console.storage.vo.*;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * <p>
@@ -42,6 +39,10 @@ public class TAppMenuController {
         @PostMapping(path={"/", ""})
         public Object create(@RequestBody TAppMenuDTO dto){
             TAppMenu entity = TAppMenuMapStruct.INSTANCE.dtoToEntity(dto);
+            if(dto.getId()==null) {
+                entity.setId(PrimaryKeyUtil.nextId());
+            }
+            entity.setCreationDatetime(LocalDateTime.now());
             return ApiResponse.ok(service.save(entity));
         }
 
@@ -57,10 +58,29 @@ public class TAppMenuController {
             return ApiResponse.ok(service.removeById(entity));
         }
 
-        @GetMapping(path = {"/{id}"})
+        @GetMapping(path = {"/item/{id}"})
         public Object get(@PathVariable("id") Serializable id){
             TAppMenu entity = service.getById(id);
             TAppMenuVO viewObject = TAppMenuMapStruct.INSTANCE.entityToVO(entity);
             return ApiResponse.ok(viewObject);
+        }
+
+        @GetMapping(path = {"/firstLevel"})
+        public Object firstLevel(){
+            QueryWrapper<TAppMenu> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq(TAppMenu.PARENT_ID, 0);
+            List<TAppMenu> menus = service.list(queryWrapper);
+            List<TAppMenuVO> voList = TAppMenuMapStruct.INSTANCE.entityListToVOList(menus);
+            return ApiResponse.ok(voList);
+        }
+
+        @GetMapping(path = {"/{id}/subMenus"})
+        public Object subMenus(@PathVariable("id") Serializable id){
+            QueryWrapper<TAppMenu> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq(TAppMenu.PARENT_ID, id);
+            queryWrapper.orderByAsc(TAppMenu.NAME);
+            List<TAppMenu> menus = service.list(queryWrapper);
+            List<TAppMenuVO> voList = TAppMenuMapStruct.INSTANCE.entityListToVOList(menus);
+            return ApiResponse.ok(voList);
         }
 }

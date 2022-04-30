@@ -1,8 +1,12 @@
-System.register(['./template.html', './style.css'], function(_e, _c){
+System.register(['./template.html', './style.css', 'libs/menu'], function(_e, _c){
     let html;
+    let css ;
+    let Menu;
     return {
         setters:[
-            function(_){html=_.default;}
+            function(_){html=_.default;},
+            function(_){css=_.default;},
+            function(_){Menu=_;}
         ],
         execute(){
             _e({
@@ -11,6 +15,9 @@ System.register(['./template.html', './style.css'], function(_e, _c){
                     return {
                         isCollapse:true
                     }
+                },
+                components:{
+                    'meta-menu': Menu
                 },
                 methods:{
                     handleOpen(key, keyPath){

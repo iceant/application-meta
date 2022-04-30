@@ -1,0 +1,12 @@
+<el-menu :collapse="isCollapse" @open="handleOpen" @close="handleClose">
+    <el-sub-menu v-for="menu in menus" :index="menu.id">
+        <template #title>
+            <el-icon><component :is="menu.icon"/></el-icon>
+            <span>{{menu.name}}</span>
+        </template>
+        <el-menu-item v-for="item in menu.menus" :index="item.id" @click="handleClick">
+            <el-icon><component :is="item.icon"/></el-icon>
+            <template #title>{{item.name}}</template>
+        </el-menu-item>
+    </el-sub-menu>
+</el-menu>

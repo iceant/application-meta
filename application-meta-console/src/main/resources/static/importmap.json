@@ -1,7 +1,13 @@
 {
   "imports": {
     "libs": "./libs/",
-    "libs/layout": "./libs/layout/main.js"
+    "libs/layout": "./libs/layout/main.js",
+    "libs/menu": "./libs/menu/main.js",
+    "libs/NotFound": "./libs/notFound/main.js",
+    "libs/DataShapes": "./libs/DataShapes/main.js",
+    "libs/GB27930V2015": "./libs/GB27930V2015/main.js",
+    "libs/GB32960V2016": "./libs/GB32960V2016/main.js",
+    "libs/DB4403V2020": "./libs/DB4403V2020/main.js"
   },
   "scopes": {
     "/path/to/lodash/": {

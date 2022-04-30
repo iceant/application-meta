@@ -82,8 +82,9 @@ public class JsUtil {
             Object jsArgs = Context.javaToJS(args, scope);
             scope.put("$args", scope, jsArgs);
 
-            customizeScopeFn.customize(context, scope);
-
+            if(customizeScopeFn!=null) {
+                customizeScopeFn.customize(context, scope);
+            }
             URL url = ResourceUtils.getURL(resourceInClasspath);
             InputStream inputStream = url.openStream();
             reader = new InputStreamReader(inputStream);

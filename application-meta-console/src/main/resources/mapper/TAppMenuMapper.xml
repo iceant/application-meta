@@ -10,6 +10,7 @@
         <result column="description" property="description" />
         <result column="icon" property="icon" />
         <result column="path" property="path" />
+        <result column="view" property="view" />
         <result column="parent_id" property="parentId" />
         <result column="creation_datetime" property="creationDatetime" />
     </resultMap>

@@ -34,7 +34,7 @@ codegen:
           column-constant: true
         controller-config:
           rest-style: true
-          file-override: true
+          file-override: false
         mapper-config:
           baseResultMap: true
           file-override: true
