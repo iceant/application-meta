@@ -1,0 +1,27 @@
+### 新建菜单
+POST http://localhost:8080/storage/tAppMenu/
+Content-Type: application/json
+
+{
+  "name": "数据视角",
+  "userFriendlyName": {
+    "zh_CN": "数据视角"
+  },
+  "description": {
+    "zh_CN": "数据视角"
+  },
+  "icon": "",
+  "path": "/data",
+  "parentId": 0
+}
+
+### 删除菜单
+DELETE http://localhost:8080/storage/tAppMenu/
+Content-Type: application/json
+
+{
+  "id":"-653946878"
+}
+
+### 查询菜单
+GET http://localhost:8080/storage/tAppMenu/1764937728

@@ -1,0 +1,43 @@
+spring:
+  datasource:
+    url: jdbc:sqlite:meta.db
+
+logging:
+  level:
+    com:
+      baomidou:
+        mybatisplus: DEBUG
+
+codegen:
+  generators:
+    application-meta-console:
+      datasource-config:
+        url: jdbc:sqlite:meta.db
+      global-config:
+        output-dir: ./application-meta-console/src/main/java
+        author: Chen Peng
+        open: false
+      package-config:
+        path-info:
+          xml: ./application-meta-console/src/main/resources/mapper
+        parent: com.github.iceant.application.meta.console
+        module-name: storage
+      strategy-config:
+        exclude:
+          - sqlite_sequence
+        entity-config:
+          table-field-annotation: true
+          remove-is-prefix: false
+          file-override: true
+          lombok: true
+          chain-model: true
+          column-constant: true
+        controller-config:
+          rest-style: true
+          file-override: true
+        mapper-config:
+          baseResultMap: true
+          file-override: true
+#      template-config:
+#        xml: ""
+#        controller: ""

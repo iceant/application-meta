@@ -1,0 +1,11 @@
+{
+  "imports": {
+    "libs": "./libs/",
+    "libs/layout": "./libs/layout/main.js"
+  },
+  "scopes": {
+    "/path/to/lodash/": {
+      "lodash-dependency": "/path/to/scoped/package.js"
+    }
+  }
+}

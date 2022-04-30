@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    url: jdbc:sqlite:meta.db
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

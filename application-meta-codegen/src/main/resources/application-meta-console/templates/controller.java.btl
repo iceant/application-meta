@@ -1,0 +1,85 @@
+package ${package.Controller};
+
+import org.springframework.web.bind.annotation.RequestMapping;
+<% if(restControllerStyle){ %>
+import org.springframework.web.bind.annotation.RestController;
+<% }else{ %>
+import org.springframework.stereotype.Controller;
+<% } %>
+<% if(isNotEmpty(superControllerClassPackage)){ %>
+import ${superControllerClassPackage};
+<% } %>
+
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import ${package.Entity}.*;
+import ${package.MAPSTRUCT}.*;
+import ${package.Service}.*;
+import ${package.DTO}.*;
+import ${package.VO}.*;
+
+import java.io.Serializable;
+
+/**
+ * <p>
+ * ${table.comment!} 前端控制器
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+<% if(restControllerStyle){ %>
+@RestController
+<% }else{ %>
+@Controller
+<% } %>
+@RequestMapping("<% if(isNotEmpty(package.ModuleName)){ %>/${package.ModuleName}<% } %>/<% if(controllerMappingHyphenStyle){ %>${controllerMappingHyphen}<% }else{ %>${table.entityPath}<% } %>")
+<% if(kotlin){ %>
+class ${table.controllerName}<% if(isNotEmpty(superControllerClass)){ %> : ${superControllerClass}()<% } %>
+<% }else{ %>
+    <% if(isNotEmpty(superControllerClass)){ %>
+public class ${table.controllerName} extends ${superControllerClass} {
+    <% }else{ %>
+public class ${table.controllerName} {
+    <% } %>
+
+        final ${table.serviceName} service;
+
+        public ${table.controllerName}(${table.serviceName} service) {
+            this.service = service;
+        }
+
+        @GetMapping(path = {"/", ""})
+        public Object listAll(){
+            return ApiResponse.ok(service.list());
+        }
+
+        @PostMapping(path={"/", ""})
+        public Object create(@RequestBody ${entity}DTO dto){
+            ${entity} entity = ${entity}MapStruct.INSTANCE.dtoToEntity(dto);
+            return ApiResponse.ok(service.save(entity));
+        }
+
+        @PutMapping(path = {"/", ""})
+        public Object update(@RequestBody ${entity}DTO dto){
+            ${entity} entity = ${entity}MapStruct.INSTANCE.dtoToEntity(dto);
+            return ApiResponse.ok(service.updateById(entity));
+        }
+
+        @DeleteMapping(path = {"/", ""})
+        public Object delete(@RequestBody ${entity}DTO dto){
+            ${entity} entity = ${entity}MapStruct.INSTANCE.dtoToEntity(dto);
+            return ApiResponse.ok(service.removeById(entity));
+        }
+
+        @GetMapping(path = {"/{id}"})
+        public Object get(@PathVariable("id") Serializable id){
+            ${entity} entity = service.getById(id);
+            ${entity}VO viewObject = ${entity}MapStruct.INSTANCE.entityToVO(entity);
+            return ApiResponse.ok(viewObject);
+        }
+}
+<% } %>

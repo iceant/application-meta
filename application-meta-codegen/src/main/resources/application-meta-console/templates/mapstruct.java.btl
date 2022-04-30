@@ -1,0 +1,30 @@
+package ${package.MAPSTRUCT};
+
+import ${package.DTO}.${entity}DTO;
+import ${package.VO}.${entity}VO;
+import ${package.Entity}.${entity};
+import com.github.iceant.application.meta.console.domain.LocaleString;
+
+import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.factory.Mappers;
+import org.mapstruct.NullValuePropertyMappingStrategy;
+
+@Mapper(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+public interface ${entity}MapStruct {
+    ${entity}MapStruct INSTANCE = Mappers.getMapper(${entity}MapStruct.class);
+
+    ${entity} dtoToEntity(${entity}DTO dto);
+
+    ${entity} merge(${entity}DTO dto, @MappingTarget ${entity} entity);
+
+    ${entity}VO entityToVO(${entity} entity);
+
+    default String map(LocaleString value){
+        return value.toString();
+    }
+
+    default LocaleString map(String value){
+        return LocaleString.fromString(value);
+    }
+}
