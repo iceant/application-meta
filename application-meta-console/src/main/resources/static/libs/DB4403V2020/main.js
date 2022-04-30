@@ -1,4 +1,4 @@
-System.register(['./template.html'], function(_e, _c){
+System.register(['./template.html', './style.css'], function(_e, _c){
     let html;
 
     return {
@@ -7,7 +7,12 @@ System.register(['./template.html'], function(_e, _c){
         ],
         execute(){
             _e({
-                template:html
+                template:html,
+                methods:{
+                    handleBack(){
+                        this.$router.go(-1);
+                    }
+                }
             });
         }
     }

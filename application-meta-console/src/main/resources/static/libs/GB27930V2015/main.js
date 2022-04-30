@@ -8,6 +8,11 @@ System.register(['./template.html'], function(_e, _c){
         execute(){
             _e({
                 template:html
+                ,methods:{
+                    handleBack(){
+                        this.$router.go(-1);
+                    }
+                }
             });
         }
     }
