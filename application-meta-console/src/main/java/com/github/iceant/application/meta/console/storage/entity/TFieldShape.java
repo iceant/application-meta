@@ -27,7 +27,7 @@ public class TFieldShape implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId("id")
-    private Integer id;
+    private Long id;
 
     @TableField("data_type_id")
     private Integer dataTypeId;

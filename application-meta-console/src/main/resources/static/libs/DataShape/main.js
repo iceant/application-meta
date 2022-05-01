@@ -14,7 +14,6 @@ System.register(['./template.html', './style.css'], function(_e, _c){
                         isTabsHidden: true,
                         selectedRow: {},
                         tabsActiveName: 'detail',
-                        selectedFields:[],
                         isDrawerShow: false,
                         form:{}
                     };
@@ -29,21 +28,22 @@ System.register(['./template.html', './style.css'], function(_e, _c){
                 methods:{
                     showFields(row){
                         let self = this;
+                        row = row?row:this.selectedRow;
                         axios.get('/storage/tDataShape/item/'+row.id+'/fields').then(function(res){
-                            self.selectedFields = res.data.result;
+                            self.selectedRow.selectedFields = res.data.result.records;
                         });
                     },
                     handleBack(){
                         this.$router.go(-1);
                     },
                     handleDetail(row){
-                        let tabs = this.$el.querySelector('.data-shape-tabs');
                         if(Object.keys(this.selectedRow).length===0 || row===this.selectedRow) {
                             this.isTabsHidden = !this.isTabsHidden;
                         }else{
                             this.isTabsHidden = false;
                         }
                         this.selectedRow = row;
+                        this.showFields(row);
                     },
                     handleEdit(){
                         console.log(arguments);
@@ -59,6 +59,17 @@ System.register(['./template.html', './style.css'], function(_e, _c){
                     handleAddField(){
                         console.log(arguments);
                         console.log(this.form);
+                        let self = this;
+                        this.form.dataShapeId=this.selectedRow.id;
+                        axios.post('/storage/tFieldShape', this.form).then(function(res){
+                            console.log(res);
+                            let result = res.data.result;
+                            self.isDrawerShow=false;
+                            self.showFields();
+                        }).catch(function (error) {
+                            console.log(error);
+                        });;
+
                     }
                 }
             });

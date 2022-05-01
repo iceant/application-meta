@@ -3,8 +3,6 @@
 // $tableInfo:
 // $context
 
-if($tableInfo.entityName=='TAppMenu' || $tableInfo.entityName=='TProtocolAccount'){
-    $context.put('fieldMap', {
-        "id": "Long"
-    });
-}
+$context.put('fieldMap', {
+    "id": "Long"
+});

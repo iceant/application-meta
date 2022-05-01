@@ -1,5 +1,6 @@
 package com.github.iceant.application.meta.console.storage.controller;
 
+import com.github.iceant.application.meta.console.utils.PrimaryKeyUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,6 +17,7 @@ import com.github.iceant.application.meta.console.storage.dto.*;
 import com.github.iceant.application.meta.console.storage.vo.*;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -45,6 +47,12 @@ public class TFieldShapeController {
         @PostMapping(path={"/", ""})
         public Object create(@RequestBody TFieldShapeDTO dto){
             TFieldShape entity = TFieldShapeMapStruct.INSTANCE.dtoToEntity(dto);
+            if(dto.getId()==null){
+                entity.setId(PrimaryKeyUtil.nextId());
+            }
+            if(dto.getCreationDatetime()==null){
+                entity.setCreationDatetime(LocalDateTime.now());
+            }
             return ApiResponse.ok(service.save(entity));
         }
 

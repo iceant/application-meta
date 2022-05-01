@@ -1,6 +1,9 @@
 package com.github.iceant.application.meta.console.storage.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.plugins.pagination.PageDTO;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -70,10 +73,13 @@ public class TDataShapeController {
         }
 
         @GetMapping(path={"/item/{id}/fields"})
-        public Object fieldsList(@PathVariable("id") Serializable id){
+        public Object fieldsList(PageDTO<TFieldShape> page, @PathVariable("id") Serializable id){
             QueryWrapper<TFieldShape> queryWrapper = new QueryWrapper<>();
             queryWrapper.eq(TFieldShape.DATA_SHAPE_ID, id);
-            List<TFieldShape> fieldShapes = fieldShapeService.list(queryWrapper);
-            return ApiResponse.ok(TFieldShapeMapStruct.INSTANCE.entityListToVOList(fieldShapes));
+            IPage<TFieldShape> fieldShapes = fieldShapeService.page(page, queryWrapper);
+            List<TFieldShapeVO> voList = TFieldShapeMapStruct.INSTANCE.entityListToVOList(fieldShapes.getRecords());
+            Page<TFieldShapeVO> resultPage = new Page<>(fieldShapes.getCurrent(), fieldShapes.getSize(), fieldShapes.getTotal(), fieldShapes.searchCount());
+            resultPage.setRecords(voList);
+            return ApiResponse.ok(resultPage);
         }
 }

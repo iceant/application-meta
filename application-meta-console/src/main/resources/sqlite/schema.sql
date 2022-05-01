@@ -52,13 +52,13 @@ create table if not exists t_data_shape
 create table if not exists t_field_shape
 (
     id INTEGER PRIMARY KEY AUTOINCREMENT ,
-    data_type_id INTEGER NOT NULL ,
+    data_type_id INTEGER ,
     name TEXT,
     user_friendly_name TEXT,
     description TEXT,
     creation_datetime TIMESTAMP,
-    application_id INTEGER NOT NULL ,
-    data_shape_id INTEGER NOT NULL ,
+    application_id INTEGER ,
+    data_shape_id INTEGER ,
     is_primary_key BOOLEAN DEFAULT FALSE,
     is_nullable BOOLEAN DEFAULT TRUE,
     is_foreign_key BOOLEAN DEFAULT FALSE, -- 是否对外部引用

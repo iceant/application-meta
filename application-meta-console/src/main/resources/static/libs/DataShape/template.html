@@ -68,7 +68,7 @@
             </el-tab-pane>
             <el-tab-pane label="字段构成" name="fields">
                 <el-button type="primary" @click="handleDrawerShow(selectedRow.id)" icon="Edit">{{selectedRow.name}} - 添加字段</el-button>
-                <el-table :data="selectedFields" stripe style="width: 100%">
+                <el-table :data="selectedRow.selectedFields" stripe style="width: 100%">
                     <el-table-column fixed prop="id" label="ID" width="180" />
                     <el-table-column prop="name" label="名称" width="180" />
                     <el-table-column prop="userFriendlyName" label="显示名称" />
@@ -90,6 +90,17 @@
         <el-form :model="form" label-width="120px">
             <el-form-item label="字段名称">
                 <el-input v-model="form.name" />
+            </el-form-item>
+            <el-form-item label="数据类型">
+                <el-select v-model="form.dataTypeId" placeholder="请选择数据类型">
+                    <el-option label="STRING" value="1" />
+                    <el-option label="BOOLEAN" value="2" />
+                    <el-option label="INTEGER" value="3" />
+                    <el-option label="DECIMAL" value="4" />
+                    <el-option label="BLOB" value="5" />
+                    <el-option label="ARRAY" value="6" />
+                    <el-option label="OBJECT" value="7" />
+                </el-select>
             </el-form-item>
             <el-form-item label="显示名称">
                 <el-input v-model="form.userFriendlyName" />
@@ -133,10 +144,10 @@
             <el-form-item label="字段最大长度">
                 <el-input v-model="form.fieldMaxLength" />
             </el-form-item>
-            <el-form-item label="枚举值">
+            <el-form-item label="枚举值(a,b,c...)">
                 <el-input v-model="form.enumValues" />
             </el-form-item>
-            <el-form-item label="范围值">
+            <el-form-item label="范围值(n~m)">
                 <el-input v-model="form.rangeValues" />
             </el-form-item>
             <el-form-item label="单位">
