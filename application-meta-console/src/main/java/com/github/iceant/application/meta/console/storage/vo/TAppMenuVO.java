@@ -2,9 +2,11 @@ package com.github.iceant.application.meta.console.storage.vo;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.math.*;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 /**
  * <p>
@@ -12,10 +14,11 @@ import lombok.Setter;
  * </p>
  *
  * @author Chen Peng
- * @since 2022-04-30
+ * @since 2022-05-01
  */
 @Getter
 @Setter
+@Accessors(chain = true)
 public class TAppMenuVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -24,9 +27,9 @@ public class TAppMenuVO implements Serializable {
 
     private String name;
 
-    private com.github.iceant.application.meta.console.domain.LocaleString userFriendlyName;
+    private String userFriendlyName;
 
-    private com.github.iceant.application.meta.console.domain.LocaleString description;
+    private String description;
 
     private String icon;
 
@@ -35,6 +38,8 @@ public class TAppMenuVO implements Serializable {
     private String view;
 
     private Integer parentId;
+
+    private Integer orderIndex;
 
     private LocalDateTime creationDatetime;
 

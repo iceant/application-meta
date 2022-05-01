@@ -1,0 +1,15 @@
+
+### 创建帐号
+POST http://localhost:8080/storage/tProtocolAccount
+Content-Type: application/json
+
+{
+  "id": 1,
+  "username": "gb32960v2016001",
+  "password": "password",
+  "protocolVersion": "GB32960V2016",
+  "description": "测试账号"
+}
+
+### 列出帐号
+GET http://localhost:8080/storage/tProtocolAccount

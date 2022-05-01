@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-04-30T22:08:18+0800",
+    date = "2022-05-01T20:22:51+0800",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.2 (Oracle Corporation)"
 )
 @Component
@@ -26,12 +26,13 @@ public class TAppMenuMapStructImpl implements TAppMenuMapStruct {
 
         tAppMenu.setId( dto.getId() );
         tAppMenu.setName( dto.getName() );
-        tAppMenu.setUserFriendlyName( map( dto.getUserFriendlyName() ) );
-        tAppMenu.setDescription( map( dto.getDescription() ) );
+        tAppMenu.setUserFriendlyName( dto.getUserFriendlyName() );
+        tAppMenu.setDescription( dto.getDescription() );
         tAppMenu.setIcon( dto.getIcon() );
         tAppMenu.setPath( dto.getPath() );
         tAppMenu.setView( dto.getView() );
         tAppMenu.setParentId( dto.getParentId() );
+        tAppMenu.setOrderIndex( dto.getOrderIndex() );
         tAppMenu.setCreationDatetime( dto.getCreationDatetime() );
 
         return tAppMenu;
@@ -50,10 +51,10 @@ public class TAppMenuMapStructImpl implements TAppMenuMapStruct {
             entity.setName( dto.getName() );
         }
         if ( dto.getUserFriendlyName() != null ) {
-            entity.setUserFriendlyName( map( dto.getUserFriendlyName() ) );
+            entity.setUserFriendlyName( dto.getUserFriendlyName() );
         }
         if ( dto.getDescription() != null ) {
-            entity.setDescription( map( dto.getDescription() ) );
+            entity.setDescription( dto.getDescription() );
         }
         if ( dto.getIcon() != null ) {
             entity.setIcon( dto.getIcon() );
@@ -66,6 +67,9 @@ public class TAppMenuMapStructImpl implements TAppMenuMapStruct {
         }
         if ( dto.getParentId() != null ) {
             entity.setParentId( dto.getParentId() );
+        }
+        if ( dto.getOrderIndex() != null ) {
+            entity.setOrderIndex( dto.getOrderIndex() );
         }
         if ( dto.getCreationDatetime() != null ) {
             entity.setCreationDatetime( dto.getCreationDatetime() );
@@ -84,12 +88,13 @@ public class TAppMenuMapStructImpl implements TAppMenuMapStruct {
 
         tAppMenuVO.setId( entity.getId() );
         tAppMenuVO.setName( entity.getName() );
-        tAppMenuVO.setUserFriendlyName( map( entity.getUserFriendlyName() ) );
-        tAppMenuVO.setDescription( map( entity.getDescription() ) );
+        tAppMenuVO.setUserFriendlyName( entity.getUserFriendlyName() );
+        tAppMenuVO.setDescription( entity.getDescription() );
         tAppMenuVO.setIcon( entity.getIcon() );
         tAppMenuVO.setPath( entity.getPath() );
         tAppMenuVO.setView( entity.getView() );
         tAppMenuVO.setParentId( entity.getParentId() );
+        tAppMenuVO.setOrderIndex( entity.getOrderIndex() );
         tAppMenuVO.setCreationDatetime( entity.getCreationDatetime() );
 
         return tAppMenuVO;

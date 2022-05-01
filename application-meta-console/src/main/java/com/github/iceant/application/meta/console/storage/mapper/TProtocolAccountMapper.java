@@ -1,6 +1,6 @@
 package com.github.iceant.application.meta.console.storage.mapper;
 
-import com.github.iceant.application.meta.console.storage.entity.TAppMenu;
+import com.github.iceant.application.meta.console.storage.entity.TProtocolAccount;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author Chen Peng
  * @since 2022-05-01
  */
-public interface TAppMenuMapper extends BaseMapper<TAppMenu> {
+public interface TProtocolAccountMapper extends BaseMapper<TProtocolAccount> {
 
 }

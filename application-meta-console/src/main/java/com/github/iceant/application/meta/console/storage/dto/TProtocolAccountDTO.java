@@ -19,27 +19,19 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-public class TAppMenuDTO implements Serializable {
+public class TProtocolAccountDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private Long id;
 
-    private String name;
+    private String username;
 
-    private String userFriendlyName;
+    private String password;
+
+    private String protocolVersion;
 
     private String description;
-
-    private String icon;
-
-    private String path;
-
-    private String view;
-
-    private Integer parentId;
-
-    private Integer orderIndex;
 
     private LocalDateTime creationDatetime;
 

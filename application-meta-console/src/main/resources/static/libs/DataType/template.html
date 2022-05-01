@@ -1,0 +1,13 @@
+<div class="data-type">
+<el-page-header icon="ArrowLeft" content="基本数据类型" @back="handleBack"/>
+
+<el-container>
+    <el-table :data="tableData" stripe style="width: 100%">
+        <el-table-column prop="id" label="ID" width="180" />
+        <el-table-column prop="name" label="名称" width="180" />
+        <el-table-column prop="userFriendlyName" label="显示名称" />
+        <el-table-column prop="description" label="描述" />
+        <el-table-column prop="creationDatetime" label="创建时间" />
+    </el-table>
+</el-container>
+</div>

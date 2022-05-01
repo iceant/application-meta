@@ -69,6 +69,7 @@ public class TAppMenuController {
         public Object firstLevel(){
             QueryWrapper<TAppMenu> queryWrapper = new QueryWrapper<>();
             queryWrapper.eq(TAppMenu.PARENT_ID, 0);
+            queryWrapper.orderByAsc(TAppMenu.ORDER_INDEX);
             List<TAppMenu> menus = service.list(queryWrapper);
             List<TAppMenuVO> voList = TAppMenuMapStruct.INSTANCE.entityListToVOList(menus);
             return ApiResponse.ok(voList);
@@ -78,7 +79,7 @@ public class TAppMenuController {
         public Object subMenus(@PathVariable("id") Serializable id){
             QueryWrapper<TAppMenu> queryWrapper = new QueryWrapper<>();
             queryWrapper.eq(TAppMenu.PARENT_ID, id);
-            queryWrapper.orderByAsc(TAppMenu.NAME);
+            queryWrapper.orderByAsc(TAppMenu.ORDER_INDEX);
             List<TAppMenu> menus = service.list(queryWrapper);
             List<TAppMenuVO> voList = TAppMenuMapStruct.INSTANCE.entityListToVOList(menus);
             return ApiResponse.ok(voList);

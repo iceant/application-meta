@@ -30,7 +30,7 @@ codegen:
           remove-is-prefix: false
           file-override: true
           lombok: true
-          chain-model: true
+          chain: true
           column-constant: true
         controller-config:
           rest-style: true

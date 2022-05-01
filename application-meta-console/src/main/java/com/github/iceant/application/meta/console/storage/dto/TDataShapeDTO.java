@@ -19,7 +19,7 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-public class TAppMenuDTO implements Serializable {
+public class TDataShapeDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -31,17 +31,9 @@ public class TAppMenuDTO implements Serializable {
 
     private String description;
 
-    private String icon;
-
-    private String path;
-
-    private String view;
-
-    private Integer parentId;
-
-    private Integer orderIndex;
-
     private LocalDateTime creationDatetime;
+
+    private Integer applicationId;
 
 
 }

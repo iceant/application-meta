@@ -20,13 +20,13 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-@TableName(value="t_app_menu", autoResultMap = true)
-public class TAppMenu implements Serializable {
+@TableName(value="t_data_shape", autoResultMap = true)
+public class TDataShape implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @TableId("id")
-    private Long id;
+    private Integer id;
 
     @TableField("name")
     private String name;
@@ -37,23 +37,11 @@ public class TAppMenu implements Serializable {
     @TableField("description")
     private String description;
 
-    @TableField("icon")
-    private String icon;
-
-    @TableField("path")
-    private String path;
-
-    @TableField("view")
-    private String view;
-
-    @TableField("parent_id")
-    private Integer parentId;
-
-    @TableField("order_index")
-    private Integer orderIndex;
-
     @TableField("creation_datetime")
     private LocalDateTime creationDatetime;
+
+    @TableField("application_id")
+    private Integer applicationId;
 
     public static final String ID = "id";
 
@@ -63,16 +51,8 @@ public class TAppMenu implements Serializable {
 
     public static final String DESCRIPTION = "description";
 
-    public static final String ICON = "icon";
-
-    public static final String PATH = "path";
-
-    public static final String VIEW = "view";
-
-    public static final String PARENT_ID = "parent_id";
-
-    public static final String ORDER_INDEX = "order_index";
-
     public static final String CREATION_DATETIME = "creation_datetime";
+
+    public static final String APPLICATION_ID = "application_id";
 
 }

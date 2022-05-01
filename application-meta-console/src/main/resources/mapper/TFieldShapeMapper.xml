@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.iceant.application.meta.console.storage.mapper.TFieldShapeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.github.iceant.application.meta.console.storage.entity.TFieldShape">
+        <id column="id" property="id" />
+        <result column="data_type_id" property="dataTypeId" />
+        <result column="name" property="name" />
+        <result column="user_friendly_name" property="userFriendlyName" />
+        <result column="description" property="description" />
+        <result column="creation_datetime" property="creationDatetime" />
+        <result column="application_id" property="applicationId" />
+        <result column="data_shape_id" property="dataShapeId" />
+        <result column="is_primary_key" property="isPrimaryKey" />
+        <result column="is_nullable" property="isNullable" />
+        <result column="is_foreign_key" property="isForeignKey" />
+        <result column="foreign_data_shape" property="foreignDataShape" />
+        <result column="foreign_field_name" property="foreignFieldName" />
+        <result column="default_value" property="defaultValue" />
+        <result column="min_value" property="minValue" />
+        <result column="max_value" property="maxValue" />
+        <result column="field_length" property="fieldLength" />
+        <result column="field_max_length" property="fieldMaxLength" />
+        <result column="enum_values" property="enumValues" />
+        <result column="range_values" property="rangeValues" />
+        <result column="unit" property="unit" />
+        <result column="scale" property="scale" />
+        <result column="value_offset" property="valueOffset" />
+        <result column="value_resolution" property="valueResolution" />
+    </resultMap>
+</mapper>

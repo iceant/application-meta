@@ -2,6 +2,7 @@ package ${package.VO};
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.math.*;
 
 <% if(entityLombokModel){ %>
 import lombok.Getter;
