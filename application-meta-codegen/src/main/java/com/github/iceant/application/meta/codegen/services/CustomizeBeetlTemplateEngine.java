@@ -200,6 +200,10 @@ public class CustomizeBeetlTemplateEngine extends BeetlTemplateEngine {
                 List customFileList =  defineCustomFiles(tableInfo, objectMap);
                 outputCustomFile(customFileList, tableInfo, objectMap);
 
+                // reset fieldMap
+                objectMap.put("fieldMap", new HashMap());
+
+                // customize output
                 beforeOutput(tableInfo, objectMap);
 
                 // entity
@@ -210,6 +214,7 @@ public class CustomizeBeetlTemplateEngine extends BeetlTemplateEngine {
                 outputService(tableInfo, objectMap);
                 // controller
                 outputController(tableInfo, objectMap);
+
             });
 
             Map<String, Object> objectMap = makeSimpleObjectMap(config);

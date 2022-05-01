@@ -89,7 +89,7 @@ public class JsUtil {
             InputStream inputStream = url.openStream();
             reader = new InputStreamReader(inputStream);
             Object result = context.evaluateReader(scope, reader, null, 1, null);
-            if(type!=null) {
+            if(type!=null && Void.class!=type) {
                 return (T) Context.jsToJava(result, type);
             }else{
                 return null;
