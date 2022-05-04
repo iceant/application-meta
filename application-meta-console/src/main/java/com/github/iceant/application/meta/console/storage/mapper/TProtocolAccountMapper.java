@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author Chen Peng
- * @since 2022-05-01
+ * @since 2022-05-02
  */
 public interface TProtocolAccountMapper extends BaseMapper<TProtocolAccount> {
 

@@ -1,11 +1,13 @@
 {
   "imports": {
     "libs": "./libs/",
+    "EventBus": "./libs/EventBus/eventbus.js",
     "libs/layout": "./libs/layout/main.js",
     "libs/menu": "./libs/menu/main.js",
     "libs/NotFound": "./libs/notFound/main.js",
     "libs/DataShape": "./libs/DataShape/main.js",
-    "libs/DataType": "./libs/DataType/main.js"
+    "libs/DataType": "./libs/DataType/main.js",
+    "libs/FieldShapeForm": "./libs/FieldShapeForm/main.js"
   },
   "scopes": {
     "/path/to/lodash/": {

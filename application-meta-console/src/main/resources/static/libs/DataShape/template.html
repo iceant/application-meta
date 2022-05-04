@@ -73,12 +73,26 @@
                     <el-table-column prop="name" label="名称" width="180" />
                     <el-table-column prop="userFriendlyName" label="显示名称" />
                     <el-table-column prop="description" label="描述" />
+                    <el-table-column prop="dataTypeId" label="数据类型" />
+                    <el-table-column prop="isPrimaryKey" label="是否主键" />
+                    <el-table-column prop="isNullable" label="是否为空" />
+                    <el-table-column prop="isForeignKey" label="是否引用" />
+                    <el-table-column prop="defaultValue" label="默认值" />
+                    <el-table-column prop="minValue" label="最小值" />
+                    <el-table-column prop="maxValue" label="最大值" />
+                    <el-table-column prop="fieldLength" label="字段长度" />
+                    <el-table-column prop="fieldMaxLength" label="最大长度" />
+                    <el-table-column prop="enumValues" label="枚举值" />
+                    <el-table-column prop="rangeValues" label="范围值" />
+                    <el-table-column prop="unit" label="单位" />
+                    <el-table-column prop="scale" label="小数精度" />
+                    <el-table-column prop="valueOffset" label="值偏移量" />
+                    <el-table-column prop="valueResolution" label="值分辨率" />
                     <el-table-column prop="creationDatetime" label="创建时间" />
                     <el-table-column prop="applicationId" label="所属应用ID" />
                     <el-table-column fixed="right" label="操作" width="120">
                         <template #default="scope">
-                            <el-button type="text" size="small" @click.prevent="handleDetail(scope.row)">详情</el-button>
-                            <el-button type="text" size="small" @click.prevent="handleEdit(scope.row.id)">编辑</el-button>
+                            <el-button type="text" size="small" @click.prevent="handleFieldDelete(scope.row.id)">删除</el-button>
                         </template>
                     </el-table-column>
                 </el-table>
@@ -87,85 +101,6 @@
     </el-row>
 
     <el-drawer v-model="isDrawerShow" :title="selectedRow.name+' - 添加字段'" :with-header="true">
-        <el-form :model="form" label-width="120px">
-            <el-form-item label="字段名称">
-                <el-input v-model="form.name" />
-            </el-form-item>
-            <el-form-item label="数据类型">
-                <el-select v-model="form.dataTypeId" placeholder="请选择数据类型">
-                    <el-option label="STRING" value="1" />
-                    <el-option label="BOOLEAN" value="2" />
-                    <el-option label="INTEGER" value="3" />
-                    <el-option label="DECIMAL" value="4" />
-                    <el-option label="BLOB" value="5" />
-                    <el-option label="ARRAY" value="6" />
-                    <el-option label="OBJECT" value="7" />
-                </el-select>
-            </el-form-item>
-            <el-form-item label="显示名称">
-                <el-input v-model="form.userFriendlyName" />
-            </el-form-item>
-            <el-form-item label="字段描述">
-                <el-input v-model="form.description" type="textarea"/>
-            </el-form-item>
-            <el-form-item label="是否主键">
-                <el-switch v-model="form.isPrimaryKey" />
-            </el-form-item>
-            <el-form-item label="是否可以为空">
-                <el-switch v-model="form.isNullable" />
-            </el-form-item>
-            <el-form-item label="是否外键">
-                <el-switch v-model="form.isForeignKey" />
-            </el-form-item>
-            <el-form-item label="引用数据类型名称">
-                <el-select v-model="form.foreignDataShape" placeholder="请选择引用的数据类型">
-                    <el-option label="Zone one" value="shanghai" />
-                    <el-option label="Zone two" value="beijing" />
-                </el-select>
-            </el-form-item>
-            <el-form-item label="引用数据类型字段名称">
-                <el-select v-model="form.foreignFieldName" placeholder="请选择引用的数据类型字段">
-                    <el-option label="Zone one" value="shanghai" />
-                    <el-option label="Zone two" value="beijing" />
-                </el-select>
-            </el-form-item>
-            <el-form-item label="默认值">
-                <el-input v-model="form.defaultValue" />
-            </el-form-item>
-            <el-form-item label="最小值">
-                <el-input v-model="form.minValue" />
-            </el-form-item>
-            <el-form-item label="最大值">
-                <el-input v-model="form.maxValue" />
-            </el-form-item>
-            <el-form-item label="字段长度">
-                <el-input v-model="form.fieldLength" />
-            </el-form-item>
-            <el-form-item label="字段最大长度">
-                <el-input v-model="form.fieldMaxLength" />
-            </el-form-item>
-            <el-form-item label="枚举值(a,b,c...)">
-                <el-input v-model="form.enumValues" />
-            </el-form-item>
-            <el-form-item label="范围值(n~m)">
-                <el-input v-model="form.rangeValues" />
-            </el-form-item>
-            <el-form-item label="单位">
-                <el-input v-model="form.unit" />
-            </el-form-item>
-            <el-form-item label="小数点位数">
-                <el-input v-model="form.scale" />
-            </el-form-item>
-            <el-form-item label="值换算偏移量">
-                <el-input v-model="form.valueOffset" />
-            </el-form-item>
-            <el-form-item label="值换算精度">
-                <el-input v-model="form.valueResolution" />
-            </el-form-item>
-            <el-form-item>
-                <el-button type="primary" @click="handleAddField">保存</el-button>
-                <el-button @click="isDrawerShow=false">取消</el-button>
-            </el-form-item>
-        </el-form>
+        <field-shape-form ref="fieldShapeForm" @cancel="handleFieldShapeFormCancel" @save="handleAddField"/>
     </el-drawer>
 </div>

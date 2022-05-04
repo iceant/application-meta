@@ -1,6 +1,5 @@
 package com.github.iceant.application.meta.console.storage.controller;
 
-import com.github.iceant.application.meta.console.utils.PrimaryKeyUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,7 +16,6 @@ import com.github.iceant.application.meta.console.storage.dto.*;
 import com.github.iceant.application.meta.console.storage.vo.*;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -26,7 +24,7 @@ import java.util.List;
  * </p>
  *
  * @author Chen Peng
- * @since 2022-05-01
+ * @since 2022-05-02
  */
 @RestController
 @RequestMapping("/storage/tProtocolAccount")
@@ -47,10 +45,6 @@ public class TProtocolAccountController {
         @PostMapping(path={"/", ""})
         public Object create(@RequestBody TProtocolAccountDTO dto){
             TProtocolAccount entity = TProtocolAccountMapStruct.INSTANCE.dtoToEntity(dto);
-            if(dto.getId()==null){
-                entity.setId(PrimaryKeyUtil.nextId());
-            }
-            entity.setCreationDatetime(LocalDateTime.now());
             return ApiResponse.ok(service.save(entity));
         }
 
@@ -60,10 +54,14 @@ public class TProtocolAccountController {
             return ApiResponse.ok(service.updateById(entity));
         }
 
-        @DeleteMapping(path = {"/", ""})
-        public Object delete(@RequestBody TProtocolAccountDTO dto){
-            TProtocolAccount entity = TProtocolAccountMapStruct.INSTANCE.dtoToEntity(dto);
-            return ApiResponse.ok(service.removeById(entity));
+        @DeleteMapping(path = {"/{id}"})
+        public Object delete(@PathVariable("id") Serializable id){
+            boolean result = service.removeById(id);
+            if(result){
+                return ApiResponse.ok(result);
+            }else{
+                return ApiResponse.of(404, id, "NOT FOUND");
+            }
         }
 
         @GetMapping(path = {"/item/{id}"})

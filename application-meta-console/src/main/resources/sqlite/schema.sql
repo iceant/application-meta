@@ -52,13 +52,13 @@ create table if not exists t_data_shape
 create table if not exists t_field_shape
 (
     id INTEGER PRIMARY KEY AUTOINCREMENT ,
+    application_id INTEGER ,
+    data_shape_id INTEGER ,
     data_type_id INTEGER ,
     name TEXT,
     user_friendly_name TEXT,
     description TEXT,
     creation_datetime TIMESTAMP,
-    application_id INTEGER ,
-    data_shape_id INTEGER ,
     is_primary_key BOOLEAN DEFAULT FALSE,
     is_nullable BOOLEAN DEFAULT TRUE,
     is_foreign_key BOOLEAN DEFAULT FALSE, -- 是否对外部引用
@@ -77,4 +77,3 @@ create table if not exists t_field_shape
     value_resolution DECIMAL, -- 数值分辨率, 实际值=字面值 * 分辨率 + 偏移量
     unique (data_shape_id, name)
 );
-

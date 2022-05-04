@@ -1,13 +1,18 @@
-System.register(['./template.html', './style.css'], function(_e, _c){
+System.register(['./template.html', './style.css', 'libs/FieldShapeForm'], function(_e, _c){
     let html;
-    const EMPTY_OBJECT = {};
+    let FieldShapeForm;
     return {
         setters:[
-            function(_){html=_.default;}
+            function(_){html=_.default;},
+            function(_){},
+            function(_){FieldShapeForm=_},
         ],
         execute(){
             _e({
                 template:html,
+                components:{
+                    FieldShapeForm: FieldShapeForm
+                },
                 data(){
                     return {
                         tableData:[],
@@ -57,19 +62,29 @@ System.register(['./template.html', './style.css'], function(_e, _c){
                         this.isDrawerShow=true;
                     },
                     handleAddField(){
-                        console.log(arguments);
-                        console.log(this.form);
                         let self = this;
+                        this.form=this.$refs.fieldShapeForm.form;
                         this.form.dataShapeId=this.selectedRow.id;
                         axios.post('/storage/tFieldShape', this.form).then(function(res){
-                            console.log(res);
                             let result = res.data.result;
                             self.isDrawerShow=false;
                             self.showFields();
                         }).catch(function (error) {
                             console.log(error);
-                        });;
-
+                        });
+                    },
+                    handleFieldDelete(id){
+                        let self = this;
+                        axios.delete('/storage/tFieldShape/'+id).then(function(res){
+                            let ret = res.data;
+                            console.log(res);
+                            self.showFields();
+                        }).catch(function(err){
+                            console.log(err);
+                        });
+                    },
+                    handleFieldShapeFormCancel(){
+                        this.isDrawerShow=false;
                     }
                 }
             });

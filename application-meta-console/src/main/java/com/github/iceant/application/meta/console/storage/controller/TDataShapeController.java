@@ -59,11 +59,15 @@ public class TDataShapeController {
             return ApiResponse.ok(service.updateById(entity));
         }
 
-        @DeleteMapping(path = {"/", ""})
-        public Object delete(@RequestBody TDataShapeDTO dto){
-            TDataShape entity = TDataShapeMapStruct.INSTANCE.dtoToEntity(dto);
-            return ApiResponse.ok(service.removeById(entity));
+    @DeleteMapping(path = {"/{id}"})
+    public Object delete(@PathVariable("id") Serializable id){
+        boolean result = service.removeById(id);
+        if(result){
+            return ApiResponse.ok(result);
+        }else{
+            return ApiResponse.of(404, id, "NOT FOUND");
         }
+    }
 
         @GetMapping(path = {"/item/{id}"})
         public Object get(@PathVariable("id") Serializable id){

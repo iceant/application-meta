@@ -24,7 +24,7 @@ import java.util.List;
  * </p>
  *
  * @author Chen Peng
- * @since 2022-05-01
+ * @since 2022-05-02
  */
 @RestController
 @RequestMapping("/storage/tApplication")
@@ -54,10 +54,14 @@ public class TApplicationController {
             return ApiResponse.ok(service.updateById(entity));
         }
 
-        @DeleteMapping(path = {"/", ""})
-        public Object delete(@RequestBody TApplicationDTO dto){
-            TApplication entity = TApplicationMapStruct.INSTANCE.dtoToEntity(dto);
-            return ApiResponse.ok(service.removeById(entity));
+        @DeleteMapping(path = {"/{id}"})
+        public Object delete(@PathVariable("id") Serializable id){
+            boolean result = service.removeById(id);
+            if(result){
+                return ApiResponse.ok(result);
+            }else{
+                return ApiResponse.of(404, id, "NOT FOUND");
+            }
         }
 
         @GetMapping(path = {"/item/{id}"})
